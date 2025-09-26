@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Home, Clipboard, BarChart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 // Dummy Data
 const RAW_STUDENTS = [
@@ -36,6 +37,7 @@ export default function Allocation() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeSection, setActiveSection] = useState("matches");
   const [matchFilter, setMatchFilter] = useState("all");
+  
 
   const sidebarItems = [
     { id: "matches", label: "Matches", icon: Home },
@@ -52,6 +54,12 @@ export default function Allocation() {
     }, 400);
     return () => clearTimeout(timer);
   }, []);
+
+const navigate = useNavigate()
+ const handleBack = ()=>{
+      navigate('/organization-dash')
+ }
+
 
   const filteredStudents = students.filter(s => {
     const t = searchTerm.toLowerCase();
@@ -83,10 +91,16 @@ export default function Allocation() {
     <div className="min-h-screen flex bg-gray-50">
       {/* Sidebar */}
           
-
+          
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto p-4 space-y-6">
-          
+          <button
+            type="button"
+            className="w-full text-gray-600 hover:text-gray-900 h-9 text-sm flex items-center justify-center"
+            onClick={handleBack}
+          >
+            ← Back to role selection
+          </button>
         {activeSection === "matches" && (
           <section>
             <div className="flex justify-between items-center mb-4">

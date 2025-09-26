@@ -9,7 +9,7 @@ export default function NavBar({ children }) {
   const menuItems = [
     { name: "Home", path: "/" },
     { name: "For User", path: "/user-match" },
-    { name: "For Organisation", path: "/organization-dashboard" },
+    { name: "For Organisation", path: "/organization-dash" },
     { name: "Analysis", path: "/analysis" },
     { name: "Allocation", path: "/allocation" },
 

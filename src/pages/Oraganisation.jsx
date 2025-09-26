@@ -49,7 +49,7 @@ export default function InternshipAllocationDashboard() {
     { id: "matches", label: "Matches", icon: Home },
     { id: "logs", label: "Logs", icon: Clipboard },
     { id: "stats", label: "Stats", icon: BarChart },
-    { id: "view Allocation", label: "View Allocation", icon: UserStar }
+
   ];
 
    const [loading, setLoading] = useState(false);
@@ -118,21 +118,30 @@ export default function InternshipAllocationDashboard() {
 
      <div
       onClick={handleClick}
-      className="relative w-full h-12 flex items-center px-3 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 text-white cursor-pointer shadow-lg overflow-hidden transition-transform transform hover:scale-105 active:scale-95"
+      className="relative w-full h-12 flex items-center px-3 rounded-md bg-blue-700   text-white cursor-pointer shadow-lg overflow-hidden transition-transform transform hover:scale-105 active:scale-95"
     >
       {/* Continuous expanding tornado/ripple */}
      {loading && (
   <>
     <span className="absolute animate-tornado-grow"></span>
+    <span className="absolute animate-tornado-grow"></span>
+    <span className="absolute animate-tornado-grow"></span>
+    <span className="absolute animate-tornado-grow"></span>
+    <span className="absolute animate-tornado-grow" style={{ animationDelay: '0.75s' }}></span>
+    <span className="absolute animate-tornado-grow" style={{ animationDelay: '0.75s' }}></span>
+    <span className="absolute animate-tornado-grow"></span>
+    <span className="absolute animate-tornado-grow"></span>
+    <span className="absolute animate-tornado-grow" style={{ animationDelay: '0.75s' }}></span>
     <span className="absolute animate-tornado-grow" style={{ animationDelay: '0.75s' }}></span>
   </>
 )}
 
       {/* Glow effect */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/20 via-white/10 to-transparent blur-xl pointer-events-none"></div>
-
+         
       {/* Icon (static) */}
       <UserStar className="w-7 h-7 z-10" />
+      View Allocation
     </div>
 
 
@@ -215,3 +224,5 @@ function StudentCard({ s }) {
     </div>
   );
 }
+
+
