@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import NavBar from './components/NavBar'
 import {BrowserRouter ,Route,Routes } from 'react-router-dom'
 import routes from './utils/routes'
@@ -16,7 +15,6 @@ function App() {
           <Route key={index} path={route.path} element={route.element} />
         ))}
       </Routes>
-      
   </BrowserRouter>
     </>
   )
