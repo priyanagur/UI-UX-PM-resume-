@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import InternshipAllocationDashboard from '../pages/Oraganisation'
 import InternshipMatchmaking from '../pages/InternshipMatchmaking'
 import Allocation from '../pages/Allocation'
+import NotFound from '../pages/NotFound'
 const routes = [
   {
     path: "/",
@@ -36,6 +37,11 @@ const routes = [
     path: "/allocation",
     element: <Allocation/> ,
     name: "Allocation",
+  },
+   {
+    path: "*",
+    element: <NotFound />,
+    name: "404",
   },
 
 ];

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import NavBar from './components/NavBar'
-import {BrowserRouter ,Route,Routes } from 'react-router-dom'
-import routes from './utils/routes'
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import routes from "./utils/routes";
 import './App.css'
 function App() {
 
