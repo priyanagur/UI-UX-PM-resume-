@@ -4,6 +4,7 @@ import NavBar from './components/NavBar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import routes from "./utils/routes";
 import './App.css'
+import Footer from './components/Footer';
 function App() {
 
 
@@ -16,6 +17,7 @@ function App() {
           <Route key={index} path={route.path} element={route.element} />
         ))}
       </Routes>
+         <Footer/>
   </BrowserRouter>
     </>
   )

@@ -30,3 +30,8 @@
   filter: blur(1px);
   animation: tornado-grow 1.5s ease-in-out infinite;
 }
+
+
+.text-gradient-shadow {
+  text-shadow: 2px 1px 1px rgba(94, 94, 94, 0.2);
+}
