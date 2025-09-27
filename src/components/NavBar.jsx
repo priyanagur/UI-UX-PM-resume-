@@ -14,7 +14,6 @@ export default function NavBar({ children }) {
     { name: "For User", path: "/user-match" },
     { name: "For Organisation", path: "/organization-dash" },
     { name: "Analysis", path: "/analysis" },
-    { name: "Allocation", path: "/allocation" },
   ];
 
   useEffect(() => {
