@@ -38,16 +38,16 @@ export default function UserDashboard() {
   ];
 
   const mockInternships = [
-    { title: "Frontend Developer Intern", company: "Tech Corp", location: "Remote" },
-    { title: "Data Analyst Intern", company: "DataWorks", location: "Bangalore" },
-    { title: "Marketing Intern", company: "Brandly", location: "Mumbai" },
+    { title: "Frontend Developer Intern", company: "Tech Corp", location: "Remote", duration: "6 months", stipend: "₹25,000/month" },
+    { title: "Data Analyst Intern", company: "DataWorks", location: "Bangalore", duration: "4 months", stipend: "₹20,000/month" },
+    { title: "Marketing Intern", company: "Brandly", location: "Mumbai", duration: "3 months", stipend: "₹18,000/month" },
   ];
 
   return (
     <div className="flex min-h-screen bg-gray-50 pt-16">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-200  p-6 flex flex-col">
-        <h2 className="text-2xl font-bold mb-8 ">User DashBoard</h2>
+      <aside className="w-64 bg-gray-100 p-6 flex flex-col shadow-sm">
+        <h2 className="text-2xl font-bold mb-8 text-gray-900">User Dashboard</h2>
         <ul className="space-y-2 flex-1">
           {sidebarItems.map(item => {
             const Icon = item.icon;
@@ -55,10 +55,10 @@ export default function UserDashboard() {
               <li key={item.id}>
                 <button
                   onClick={() => setActiveSection(item.id)}
-                  className={`flex items-center gap-3 w-full px-4 py-2 rounded-lg transition ${
+                  className={`flex items-center gap-3 w-full px-4 py-2 rounded-lg text-left text-sm transition ${
                     activeSection === item.id
-                      ? "bg-blue-500 text-white"
-                      : "text-gray-900 hover:bg-gray-700 hover:text-white"
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-800 hover:bg-gray-200"
                   }`}
                 >
                   <Icon className="w-5 h-5" />
@@ -68,32 +68,35 @@ export default function UserDashboard() {
             );
           })}
         </ul>
-        <div className="mt-auto text-gray-400 text-sm">Dashboard</div>
-      </div>
+        <div className="mt-auto text-gray-400 text-sm">Version 1.0</div>
+      </aside>
 
       {/* Main Content */}
-      <div className="flex-1 p-8">
+      <main className="flex-1 p-8 space-y-8">
         {/* Dashboard */}
         {activeSection === "dashboard" && (
           <div>
-            <h1 className="text-3xl font-bold mb-4">Welcome Back!</h1>
+            <h1 className="text-3xl font-bold mb-2 text-gray-900">Welcome Back!</h1>
             <p className="text-gray-600 mb-6">Here’s a quick overview of your profile and activities.</p>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
                 <h3 className="font-semibold text-gray-700 mb-2">Profile Completion</h3>
                 <p className="text-xl font-bold text-blue-600 mb-3">75%</p>
                 <div className="w-full bg-gray-200 h-2 rounded-full">
                   <div className="bg-blue-600 h-2 rounded-full" style={{ width: "75%" }}></div>
                 </div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
                 <h3 className="font-semibold text-gray-700 mb-2">Available Internships</h3>
                 <p className="text-xl font-bold text-green-600">{mockInternships.length}</p>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+
+              <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
                 <h3 className="font-semibold text-gray-700 mb-2">Resume Status</h3>
-                <p className="text-xl font-bold text-yellow-600">{resumeFile ? "Selected" : "Not Uploaded"}</p>
+                <p className={`text-xl font-bold ${resumeFile ? "text-yellow-600" : "text-red-500"}`}>
+                  {resumeFile ? "Selected" : "Not Uploaded"}
+                </p>
               </div>
             </div>
           </div>
@@ -102,17 +105,18 @@ export default function UserDashboard() {
         {/* Profile */}
         {activeSection === "profile" && (
           <div>
-            <h1 className="text-2xl font-bold mb-4">Profile Settings</h1>
-            <div className="bg-white p-6 rounded-xl shadow space-y-6">
+            <h1 className="text-2xl font-bold mb-4 text-gray-900">Profile Settings</h1>
+            <div className="bg-white p-6 rounded-xl shadow-sm space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Full Name</label>
                 <input
                   value={formData.name}
                   onChange={e => handleInputChange("name", e.target.value)}
                   placeholder="Enter your full name"
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">Gender</label>
                 <div className="flex gap-2 mt-1">
@@ -120,9 +124,9 @@ export default function UserDashboard() {
                     <button
                       key={g}
                       onClick={() => handleInputChange("gender", g)}
-                      className={`flex-1 py-2 rounded text-sm ${
+                      className={`flex-1 py-2 rounded text-sm font-medium transition ${
                         formData.gender === g
-                          ? "bg-blue-500 text-white"
+                          ? "bg-blue-600 text-white"
                           : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                       }`}
                     >
@@ -131,6 +135,7 @@ export default function UserDashboard() {
                   ))}
                 </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">Skills</label>
                 <textarea
@@ -138,9 +143,10 @@ export default function UserDashboard() {
                   onChange={e => handleInputChange("skills", e.target.value)}
                   placeholder="Comma separated skills"
                   rows={3}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
                 />
               </div>
+
               <div className="flex justify-end">
                 <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
                   Save Changes
@@ -153,15 +159,15 @@ export default function UserDashboard() {
         {/* Internships */}
         {activeSection === "internships" && (
           <div>
-            <h1 className="text-2xl font-bold mb-4">Available Internships</h1>
+            <h1 className="text-2xl font-bold mb-4 text-gray-900">Available Internships</h1>
             <div className="grid gap-4">
               {mockInternships.map((internship, idx) => (
                 <div
                   key={idx}
-                  className="p-4 bg-white rounded-xl shadow hover:shadow-lg flex justify-between items-center transition"
+                  className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md flex justify-between items-center transition"
                 >
                   <div>
-                    <p className="font-semibold">{internship.title}</p>
+                    <p className="font-semibold text-gray-800">{internship.title}</p>
                     <p className="text-gray-500 text-sm">{internship.company} - {internship.location}</p>
                   </div>
                   <button className="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
@@ -176,10 +182,10 @@ export default function UserDashboard() {
         {/* Resume */}
         {activeSection === "resume" && (
           <div>
-            <h1 className="text-2xl font-bold mb-4">Upload Resume</h1>
-            <div className="bg-white p-6 rounded-xl shadow space-y-4">
+            <h1 className="text-2xl font-bold mb-4 text-gray-900">Upload Resume</h1>
+            <div className="bg-white p-6 rounded-xl shadow-sm space-y-4">
               <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="block w-full" />
-              {resumeFile && <p>Selected file: <strong>{resumeFile.name}</strong></p>}
+              {resumeFile && <p className="text-gray-700">Selected file: <strong>{resumeFile.name}</strong></p>}
               <button
                 onClick={handleResumeUpload}
                 className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
@@ -189,7 +195,7 @@ export default function UserDashboard() {
             </div>
           </div>
         )}
-      </div>
+      </main>
     </div>
   );
 }
