@@ -13,7 +13,7 @@ export default function NavBar({ children }) {
     { name: "Home", path: "/" },
     { name: "For User", path: "/user-match" },
     { name: "For Organisation", path: "/organization-dash" },
-    { name: "Analysis", path: "/analysis" },
+    { name: "Admin Portal", path: "/analysis" },
   ];
 
   useEffect(() => {

@@ -2,6 +2,7 @@
 import AnalyticDashBoard from '../pages/AnalyticsDashBoard'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
+import AdminLogin from '../pages/AdminLogin'
 import InternshipAllocationDashboard from '../pages/Oraganisation'
 import InternshipMatchmaking from '../pages/InternshipMatchmaking'
 import Allocation from '../pages/Allocation'
@@ -32,6 +33,11 @@ const routes = [
     path: "/login",
     element: <Login/>,
     name: "login",
+  },
+  {
+    path: "/admin-login",
+    element: <AdminLogin/>,
+    name: "admin-login",
   },
    {
     path: "/allocation",

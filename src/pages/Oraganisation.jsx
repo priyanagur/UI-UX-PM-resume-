@@ -287,13 +287,34 @@ export default function OrganizationPortal() {
   };
 
   const sidebarItems = [
-    { id: "dashboard", label: "Dashboard", icon: Home },
+    { id: "dashboard", label: "Register Organisation", icon: Home },
     { id: "post-internship", label: "Post Internship", icon: PlusCircle },
-    { id: "applicants", label: "Review Applicants", icon: Users },
     { id: "matches", label: "AI Matches", icon: Star },
   ];
 
   // Simulate fetching AI matches
+
+
+
+  const [orgFormData, setOrgFormData] = useState({
+  orgName: "",
+  email: "",
+  phone: "",
+  address: "",
+  website: "",
+});
+
+const handleOrgInputChange = (e) => {
+  const { name, value } = e.target;
+  setOrgFormData((prev) => ({ ...prev, [name]: value }));
+};
+
+const handleRegisterOrg = (e) => {
+  e.preventDefault();
+  console.log("Organization Registered:", orgFormData);
+  alert("Organization Registered Successfully!");
+  setOrgFormData({ orgName: "", email: "", phone: "", address: "", website: "" });
+};
 
 
   return (
@@ -360,16 +381,91 @@ export default function OrganizationPortal() {
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <h3 className="text-xl font-semibold mb-1">Welcome, </h3>
               <p className="text-gray-600">
-                Manage your internship postings and review AI-matched candidates.
-              </p>
+                Register your organization to start posting internships
+                    </p>
+
+                    <form onSubmit={handleRegisterOrg} className="space-y-4 bg-white p-6 rounded-xl shadow-sm">
+  {/* Organization Name */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">Organization Name</label>
+    <input
+      type="text"
+      name="orgName"
+      value={orgFormData.orgName}
+      onChange={handleOrgInputChange}
+      placeholder="e.g., Tech Corp Pvt Ltd"
+      className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
+      required
+    />
+  </div>
+
+  {/* Email */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">Email</label>
+    <input
+      type="email"
+      name="email"
+      value={orgFormData.email}
+      onChange={handleOrgInputChange}
+      placeholder="example@company.com"
+      className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
+      required
+    />
+  </div>
+
+  {/* Phone */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">Phone</label>
+    <input
+      type="text"
+      name="phone"
+      value={orgFormData.phone}
+      onChange={handleOrgInputChange}
+      placeholder="+91 98765 43210"
+      className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
+      required
+    />
+  </div>
+
+  {/* Address */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">Address</label>
+    <textarea
+      name="address"
+      value={orgFormData.address}
+      onChange={handleOrgInputChange}
+      placeholder="Full Address of Organization"
+      rows={3}
+      className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
+      required
+    />
+  </div>
+
+  {/* Website */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">Website</label>
+    <input
+      type="url"
+      name="website"
+      value={orgFormData.website}
+      onChange={handleOrgInputChange}
+      placeholder="https://www.example.com"
+      className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
+    />
+  </div>
+
+  {/* Submit Button */}
+  <button
+    type="submit"
+    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+  >
+    Register Organization
+  </button>
+</form>
+
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <StatCard label="Active Postings" value={stats.activePostings} />
-              <StatCard label="Applications Received" value={stats.applications} />
-              <StatCard label="AI Matches" value={stats.aiMatches} />
-              <StatCard label="Selected Candidates" value={stats.selectedCandidates} />
-            </div>
+            
           </div>
         )}
 
@@ -445,29 +541,7 @@ export default function OrganizationPortal() {
           </div>
         )}
 
-        {/* Review Applicants */}
-        {activeSection === "applicants" && (
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold">Review Applicants</h3>
-            {RAW_APPLICANTS.map((applicant) => (
-              <div
-                key={applicant.id}
-                className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition flex justify-between items-center"
-              >
-                <div>
-                  <h4 className="font-semibold">{applicant.name}</h4>
-                  <p className="text-sm text-gray-600">{applicant.institution} • {applicant.location}</p>
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {applicant.skills.map((skill) => (
-                      <span key={skill} className="text-xs border border-gray-300 px-2 py-0.5 rounded bg-gray-50">{skill}</span>
-                    ))}
-                  </div>
-                </div>
-                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-md font-medium">{applicant.matchScore}%</span>
-              </div>
-            ))}
-          </div>
-        )}
+        
       </main>
     </div>
   );

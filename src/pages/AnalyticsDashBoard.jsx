@@ -1,5 +1,6 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { User, Building, Shield, Clock, Users, TrendingUp, FileText, CheckCircle } from "lucide-react";
 
@@ -10,6 +11,16 @@ import { User, Building, Shield, Clock, Users, TrendingUp, FileText, CheckCircle
 
 export default function AnalyticDashBoard() {
   const [activeRole, setActiveRole] = useState('student');
+  const navigate = useNavigate();
+
+  // on mount, verify admin privilege
+  useEffect(() => {
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
+    if (!isAdmin) {
+      // redirect to admin login if not an admin
+      navigate("/admin-login", { replace: true });
+    }
+  }, [navigate]);
   const [grievances, setGrievances] = useState(mockGrievances);
 
   const renderRoleDashboard = () => {
@@ -99,6 +110,17 @@ export default function AnalyticDashBoard() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
+      <div className="flex justify-end mt-6">
+        <button
+          onClick={() => {
+            localStorage.removeItem("isAdmin");
+            navigate("/", { replace: true });
+          }}
+          className="px-3 py-1 rounded-md bg-red-500 text-white text-sm"
+        >
+          Logout Admin
+        </button>
+      </div>
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold">Analytics, Monitoring & Feedback Layer</h1>

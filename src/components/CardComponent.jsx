@@ -1,9 +1,15 @@
 "use client";
+import { useNavigate } from "react-router-dom";
+
+
 
 import React, { useEffect } from "react";
 import { Cpu, Globe, BarChart2, Scale } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // AOS styles
+
+
+
 
 // Mock Data with Lucide Icons
 const cards = [
@@ -60,6 +66,9 @@ function Card({ icon: Icon, title, content, color }) {
 
 // Main Component
 export default function CardComponent() {
+
+    const navigate = useNavigate(); // ✅ must be inside component
+
   useEffect(() => {
     AOS.init({
       duration: 1000, // animation duration (ms)
@@ -92,14 +101,25 @@ export default function CardComponent() {
           </div>
         </div>
 
+
+
          <div className="flex gap-6 justify-center mt-4">
-              <button data-aos="fade-right" className="px-6 py-3 bg-orange-400  text-white font-semibold rounded-lg shadow-md hover:outline-2 focus:outline-none focus:ring-2 focus:ring-white transition-all">
-                Student Portal
-              </button>
-              <button data-aos="fade-left" className="px-6 py-3 bg-gray-200 outline outline-orange-600  font-semibold rounded-lg shadow-md  focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all">
-                Organization Portal
-              </button>
-            </div>
+  <button
+    data-aos="fade-right"
+    className="px-6 py-3 bg-orange-400 text-white font-semibold rounded-lg shadow-md hover:outline-2 focus:outline-none focus:ring-2 focus:ring-white transition-all"
+        onClick={() => navigate("/user-match")} // ✅ React Router navigation
+  >
+    Student Portal
+  </button>
+
+  <button
+    data-aos="fade-left"
+    className="px-6 py-3 bg-gray-200 outline outline-orange-600 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
+        onClick={() => navigate("/organization-dash")} // ✅ React Router navigation
+  >
+    Organization Portal
+  </button>
+</div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-10">
